@@ -22,17 +22,17 @@
         <section id="section_frame" class="w-1/3 border-2 border-indigo-100 rounded-xl p-5 bg-indigo-100">
             <!-- area judul -->
             <section id="section_judul" class="mb-5 text-center">
-                APOTEK
+                Login Aplikasi
             </section>
 
             <!-- area input -->
             <section id="section_input" class="flex flex-col">
                 <!-- buat komponen textfield username dan password -->
                 <input type="text" name="txt_username" id="txt_username"
-                    class="h-10 border-solid border-2 border-cyan-700 rounded-xl focus:outline-none focus:ring focus:border-blue-500 mb-2.5 p-2.5" placeholder="Username">
+                    class="h-10 border-solid border-2 border-cyan-700 rounded-xl focus:outline-none focus:ring focus:border-blue-500 mb-2.5 p-2.5" placeholder="Isi Username" onkeypress="return setFilterInput(event)" onpaste="return false" oncut="return false" oncopy="return false">
 
                 <input type="password" name="txt_password" id="txt_password"
-                    class="h-10 border-solid border-2 border-cyan-700 rounded-xl focus:outline-none focus:ring focus:border-blue-500 p-2.5" placeholder="Password">
+                    class="h-10 border-solid border-2 border-cyan-700 rounded-xl focus:outline-none focus:ring focus:border-blue-500 p-2.5" placeholder="Isi Password" onkeypress="return setFilterInput(event)" onpaste="return false" oncut="return false" oncopy="return false">
             </section>
 
             <!-- area checkbox -->
@@ -44,7 +44,7 @@
             <!-- area tombol-->
             <section id="section_tombol" class="mt-5 text-center">
                 <button id="btn_login" class="bg-teal-400 h-8 w-32 rounded-xl" onclick="setLogin()">Login</button>
-                <button id="btn_batal" class=" bg-teal-400 h-8 w-32 rounded-xl">Batal</button>
+                <button id="btn_batal" class="bg-teal-400 h-8 w-32 rounded-xl">Batal</button>
             </section>
 
         </section>
@@ -94,7 +94,43 @@
             }
             // jika txt_username atau txt_password diisi
             else {
-                alert("Username / Password Sudah Diisi");
+                // alert("Username / Password Sudah Diisi");
+
+                // collecting data ke dalam form
+                let form = new FormData();
+                form.append("username", txt_username.value);
+                form.append("password", txt_password.value);
+                form.append("ingat", ingat);
+
+                // proses cek data (dengan konsep asyncronous/async JS)
+                // 1. promise (fetch)
+                // 2. async
+                // fetch = untuk mengirim data ke url yang akan memproses data input (form)
+                fetch("{{ url('/login/get') }}", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf_token"]').content
+                        },
+                        body: form
+                    })
+                    // berfungsi untuk merespon data hasil dari proses fetch
+                    .then((response) => response.json())
+                    // berfungsi untuk membaca hasil dari response (then yang pertama)
+                    .then((result) => {
+                        // jika hasil "result" = 1
+                        if (result.output == 1) {
+                            // alihkan ke halaman dashboard
+                            location.href = "{{ url('/') }}";
+                        }
+                        // jika hasil "result" != 1
+                        else {
+                            alert("Username / Password Tidak Ditemukan !");
+                        }
+                    })
+                    // jika proses "fetch" gagal
+                    .catch((error) => {
+                        alert("Data Gagal Dikirim !")
+                    });
 
             }
 
@@ -102,11 +138,17 @@
         }
 
         // event untuk btn_batal
+        // btn_batal.addEventListener('click',
+        // function(){
+        //     alert("Klik Tombol Batal");
+        // })
         btn_batal.addEventListener('click', setRefresh);
 
         function setRefresh() {
             location.href = "{{ url('/login') }}";
         }
+
+       
     </script>
 </body>
 

@@ -22,4 +22,17 @@ use App\Http\Controllers\Dashboard;
     // buat rout halaman login
     Route::get('/login',[Login::class,'index']);
 
+    // buat route halaman dashboard
+    Route::get('/',[Dashboard::class,'index']);
+
+        // buat route halaman dashboard (view)
+        Route::get('/view',[Dashboard::class,'getView']);
+
+
+    // buat route untuk ambil data login
+    Route::post('/login/get',[Login::class,'getLogin']);
+
+     // buat rout halaman logout
+     Route::get('/logout',[Login::class,'setLogout']);
+
     
