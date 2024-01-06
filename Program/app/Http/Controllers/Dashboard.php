@@ -50,6 +50,10 @@ class Dashboard extends Controller
 
         echo strip_tags ($display);
     }
-
+    
+    function getView(Request $req)
+    {
+        echo "Ini halaman dashboard(view)";
+    }
     
 }
