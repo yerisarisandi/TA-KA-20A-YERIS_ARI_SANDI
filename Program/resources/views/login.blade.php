@@ -147,7 +147,23 @@
         function setRefresh() {
             location.href = "{{ url('/login') }}";
         }
+        function setFilterInput(e)
+       {
+            // inisialisasi variabel 
+            let key_code = document ? e.keyCode : e.which;
 
+
+            // Blok character "=","space","(")","(')",
+            if(key_code == 61 || key_code == 32 || key_code == 34 || key_code == 39)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+       } 
        
     </script>
 </body>
