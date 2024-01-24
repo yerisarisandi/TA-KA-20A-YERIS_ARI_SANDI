@@ -19,6 +19,7 @@
     <!-- tampilan login -->
     <main id="main_login" class="flex items-center justify-center h-screen">
         <!-- frame login -->
+        <img src="login.png" alt="logo login">
         <section id="section_frame" class="w-1/3 border-2 border-indigo-100 rounded-xl p-5 bg-indigo-100">
             <!-- area judul -->
             <section id="section_judul" class="mb-5 text-center">
