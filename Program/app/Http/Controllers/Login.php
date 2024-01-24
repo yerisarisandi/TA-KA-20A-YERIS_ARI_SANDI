@@ -46,13 +46,13 @@ class Login extends Controller
             //ambil data username
             $query = $this->model->getData($data["username"],$data["password"]);
             $nama = $query->last()->nama;
-            $req->session()->put("username_loginapp",$nama);
+            $req->session()->put("username_Program",$nama);
 
             //jika ingat = 1
             if($data["ingat"] == 1)
             {
             //buat cookie
-            Cookie::queue("cookie_loginapp",$nama,120);
+            Cookie::queue("cookie_Program",$nama,120);
             }
 
             $output = 1;
@@ -69,10 +69,10 @@ class Login extends Controller
     //fungsi untuk logout
     function setLogout(Request $req){
         //hapus session
-        $req->session()->forget('username_loginapp');
+        $req->session()->forget('username_Program');
 
         //hapus cookie
-        Cookie::queue(Cookie::forget("cookie_loginapp"));
+        Cookie::queue(Cookie::forget("cookie_Program"));
 
         //alihkan ke halaman login
         return redirect("/login");

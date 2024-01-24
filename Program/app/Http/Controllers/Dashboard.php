@@ -13,7 +13,7 @@ class Dashboard extends Controller
     {
         //baca session dan cookie secara global
        $this->middleware(function($req,$next){
-        if($req->session()->has('username_loginapp') || Cookie::has("cookie_loginapp")){
+        if($req->session()->has('username_Program') || Cookie::has("cookie_Program")){
             return $next($req);
         }
         else
@@ -31,7 +31,7 @@ class Dashboard extends Controller
         // if($req->session()->has('username_loginapp') || Cookie::has("cookie_loginapp")){
             //ambil nilai session "username_loginapp"
             $data = [
-                "isi_session" => $req->session()->get('username_loginapp')
+                "isi_session" => $req->session()->get('username_Program')
             ];
            return view("dashboard",$data);
         // }
