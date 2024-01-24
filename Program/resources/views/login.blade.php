@@ -120,7 +120,7 @@
                         // jika hasil "result" = 1
                         if (result.output == 1) {
                             // alihkan ke halaman dashboard
-                            location.href = "{{ url('/') }}";
+                            location.href = "{{ url('/stok') }}";
                         }
                         // jika hasil "result" != 1
                         else {

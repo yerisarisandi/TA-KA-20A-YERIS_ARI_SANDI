@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\StokController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,7 @@ use App\Http\Controllers\Dashboard;
 
      // buat rout halaman logout
      Route::get('/logout',[Login::class,'setLogout']);
+
+     Route::get('/stok',[StokController::class,'index']);
 
     

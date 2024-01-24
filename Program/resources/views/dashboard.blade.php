@@ -14,7 +14,7 @@
             <div class="mb-3 row">
                 <label for="nim" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name='nim' id="nim">
+                    <input type="nama" class="form-control" name='nim' id="nim">
                 </div>
             </div>
             <div class="mb-3 row">
@@ -63,16 +63,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Budi</td>
-                            <td>X</td>
-                            <td>IPA</td>
-                            <td>
-                                <a href='' class="btn btn-warning btn-sm">Edit</a>
-                                <a href='' class="btn btn-danger btn-sm">Del</a>
+                        @foreach($stoks as $stok)
+                          <tr>
+                              <td>{{ $stok->No }}</td>
+                              <td>{{ $stok->Nama }}</td>
+                              <td>{{ $stok->Kelas }}</td>
+                              <td>{{ $stok->Jurusan }}</td>
+                              <td>
+                                <a href="#" class="btn btn-primary">Edit</a>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                                
                             </td>
-                        </tr>
+                          </tr>
+                      @endforeach
+                        
                     </tbody>
                 </table>
                
